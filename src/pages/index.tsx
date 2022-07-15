@@ -55,8 +55,10 @@ const Home: NextPage = () => {
               />
             </>
           )}
-
-        <div className="p-2" />
+      </div>
+      <div className="p-2" />
+      <div className="absolute bottom-0 w-full text-xs text-center pb-0">
+        <a href="https://github.com/skprasadu/roundest-mon">Github</a>
       </div>
     </div>
   );
