@@ -9,10 +9,6 @@ import { inferQueryResponse } from './api/trpc/[trpc]';
 const buttonClass =
   'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded';
 
-const extractImageUrl = (pokemon: any) => {
-  return pokemon.data?.sprites.front_default || '';
-};
-
 const Home: NextPage = () => {
   const [ids, updateIds] = useState(() => getOptionsForVote());
   const [first, second] = ids;
@@ -33,29 +29,31 @@ const Home: NextPage = () => {
     updateIds(getOptionsForVote());
   };
 
-  if (firstPokemon.isLoading || secondPokemon.isLoading) return null;
+  const dataLoaded =
+    !firstPokemon.isLoading &&
+    firstPokemon.data &&
+    !secondPokemon.isLoading &&
+    secondPokemon.data;
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center relative">
       <div className="text-2xl text-center">Which Pokemon is Rounder</div>
       <div className="p-2"></div>
       <div className="border rounded p-8 flex justify-between item-center max-w-2xl">
-        {!firstPokemon.isLoading &&
-          firstPokemon.data &&
-          !secondPokemon.isLoading &&
-          secondPokemon.data && (
-            <>
-              <PokemonListing
-                pokemon={firstPokemon.data}
-                vote={() => voteForRoundest(first)}
-              />
-              <div className="p-8">Vs</div>
-              <PokemonListing
-                pokemon={secondPokemon.data}
-                vote={() => voteForRoundest(second)}
-              />
-            </>
-          )}
+        {dataLoaded && (
+          <>
+            <PokemonListing
+              pokemon={firstPokemon.data}
+              vote={() => voteForRoundest(first)}
+            />
+            <div className="p-8">Vs</div>
+            <PokemonListing
+              pokemon={secondPokemon.data}
+              vote={() => voteForRoundest(second)}
+            />
+          </>
+        )}
+        {!dataLoaded && <img src="/rings.svg" className="w-48" />}
       </div>
       <div className="p-2" />
       <div className="absolute bottom-0 w-full text-xs text-center pb-0">
