@@ -2,6 +2,7 @@ import { getOptionsForVote } from '@/utils/getRandomPokemon';
 import { trpc } from '@/utils/trpc';
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { inferQueryResponse } from './api/trpc/[trpc]';
 
@@ -59,6 +60,11 @@ const Home: NextPage = () => {
       <div className="p-2" />
       <div className="absolute bottom-0 w-full text-xs text-center pb-0">
         <a href="https://github.com/skprasadu/roundest-mon">Github</a>
+        <span className="p-4">{'-'}</span>
+        <Link href="/results">
+          <a>Results</a>
+        </Link>
+        <span className="p-4">{'-'}</span>
       </div>
     </div>
   );
