@@ -12,7 +12,6 @@ npm run dev
 
 # TODO
 
-- [ ] Persist data fetched from PokemonAPI
-  - [ ] Maybe move image to buldapedia
-- [ ] Create the results page with counting/sorting
-- [ ] User next/image to handle image caching
+- [x] Persist data fetched from PokemonAPI
+- [x] Create the results page with counting/sorting
+- [x] User next/image to handle image caching
